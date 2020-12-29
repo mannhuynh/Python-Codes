@@ -99,3 +99,28 @@ print(flagship_store.available_menus(1200))
 
 # Let’s do another test! If we call .available_menus() with 5pm as an argument and print out the results
 print(new_installment.available_menus(1700))
+
+
+# Since we’ve been so successful building out a branded chain of restaurants, we’ve decided to diversify. We’re going to create a restaurant that sells arepas!
+# First let’s define a Business class.
+class Business:
+  def __init__(self, name, franchises):
+    self.name = name
+    self.franchises = franchises
+
+# Let’s create our first Business. The name is "Basta Fazoolin' with my Heart" and the two franchises are flagship_store and new_installment.
+first_business = Business("Basta Fazoolin' with my Heart", [flagship_store, new_installment])
+print(first_business.name, first_business.franchises)
+
+# Before we create our new business, we’ll need a Franchise and before our Franchise we’ll need a menu. The items for our Take a’ Arepa available from 10am until 8pm are the following:
+arepas_menu = {
+  'arepa pabellon': 7.00, 'pernil arepa': 8.50, 'guayanes arepa': 8.00, 'jamon arepa': 7.50
+}
+
+# Next let’s create our first Take a’ Arepa franchise! Our new restaurant is located at "189 Fitzgerald Avenue". Save the Franchise object to a variable called arepas_place.
+arepas_place = Franchise("189 Fitzgerald Avenue", arepas_menu)
+print(arepas_place, arepas_place.menus)
+
+# Now let’s make our new Business! The business is called "Take a' Arepa"!
+second_business = Business("Take a' Arepa", arepas_place)
+print(second_business, second_business.name, second_business.franchises)
