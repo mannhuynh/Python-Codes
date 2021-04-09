@@ -58,27 +58,44 @@ class GeoPoint(Marker):
 
 
 # Setup latitude and longitude
-latitude = 40.09
-longitude = -3.47
+latitude = 30.39258
+longitude = -91.01458
+locations = [[30.39258, -91.01458],
+             [29.70526, -95.46064],
+             [30.22193, -92.04208],
+             [29.95784, -90.06328],
+             [30.39524, -88.89168]]
 
 # Instantiate my_map with Map from folium
-my_map = Map(location=[latitude, longitude])
+my_map = Map(location=[30.39258, -91.01458])
 
-# Create a GeoPoint instance
-geo_point = GeoPoint(latitude=latitude, longitude=longitude)
+for lat, lon in locations:
+    # Create a GeoPoint instance
+    geo_point = GeoPoint(latitude=lat, longitude=lon)
 
-# Call the get_weather() method to show in the popup
-popup_weather = geo_point.get_weather()
+    # Call the get_weather() method to show in the popup
+    popup_weather = geo_point.get_weather()
 
-# Instantiate a popup to show weather on the marker of the map
-# Popup class get a string as an argument
-popup = Popup(str(popup_weather))
+    # Revised the popup_weather contain:
+    popup_contain = f"""
+    { popup_weather[0][0][-8:-6] }h: { round(popup_weather[0][1]) }°F <img src="http://openweathermap.org/img/wn/{ popup_weather[0][-1] }@2x.png" width=35px>
+    <hr style="margin:1px">
+    { popup_weather[1][0][-8:-6] }h: { round(popup_weather[1][1]) }°F <img src="http://openweathermap.org/img/wn/{ popup_weather[1][-1] }@2x.png" width=35px>
+    <hr style="margin:1px">
+    { popup_weather[2][0][-8:-6] }h: { round(popup_weather[2][1]) }°F <img src="http://openweathermap.org/img/wn/{ popup_weather[2][-1] }@2x.png" width=35px>
+    <hr style="margin:1px">
+    { popup_weather[3][0][-8:-6] }h: { round(popup_weather[3][1]) }°F <img src="http://openweathermap.org/img/wn/{ popup_weather[3][-1] }@2x.png" width=35px>
+    <hr style="margin:1px">
+    """
+    # Instantiate a popup to show weather on the marker of the map
+    # Popup class get a string as an argument
+    popup = Popup(popup_contain, max_width=400)
 
-# Add the popup to the geo_point
-popup.add_to(geo_point)
+    # Add the popup to the geo_point
+    popup.add_to(geo_point)
 
-# Add the geo_point to my_map
-geo_point.add_to(my_map)
+    # Add the geo_point to my_map
+    geo_point.add_to(my_map)
 
 # Save the Map instance into map.html
 my_map.save("map.html")
