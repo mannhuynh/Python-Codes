@@ -41,21 +41,30 @@ class PdfReport:
         pdf = FPDF(orientation='P', unit='pt', format='A4')
         pdf.add_page()
 
+        # Add icon
+        pdf.image("files/house.png", w=40, h=40)
+
         # Insert title
         pdf.set_font(family='Times', size=24, style='B')
-        pdf.cell(w=0, h=80, txt='Flatmate Bill', border=1, align='C', ln=1)
+        pdf.cell(w=0, h=80, txt='Flatmate Bill', border=0, align='C', ln=1)
 
         # Insert Period and value
-        pdf.cell(w=100, h=40, txt="Period: ", border=1)
-        pdf.cell(w=150, h=40, txt=bill.period, border=1, ln=1)
+        pdf.set_font(family='Times', style='I', size=20)
+        pdf.cell(w=100, h=40, txt="Period: ", border=0)
+        pdf.cell(w=150, h=40, txt=bill.period, border=0, ln=1)
+
+        pdf.set_font(family='Times', style='B', size=18)
+        pdf.cell(w=100, h=40, txt="Name ", border=0)
+        pdf.cell(w=150, h=40, txt="Amount to Pay", border=0, ln=1)
 
         # Insert name and payment of first flatmate
-        pdf.cell(w=100, h=40, txt=flatmate1.name, border=1)
-        pdf.cell(w=150, h=40, txt=flatmate1_pay, border=1, ln=1)
+        pdf.set_font(family='Times', size=16)
+        pdf.cell(w=100, h=25, txt=flatmate1.name, border=0)
+        pdf.cell(w=150, h=25, txt=flatmate1_pay, border=0, ln=1)
 
         # Insert name and payment of second flatmate
-        pdf.cell(w=100, h=40, txt=flatmate2.name, border=1)
-        pdf.cell(w=150, h=40, txt=flatmate2_pay, border=1, ln=1)
+        pdf.cell(w=100, h=25, txt=flatmate2.name, border=0)
+        pdf.cell(w=150, h=25, txt=flatmate2_pay, border=0, ln=1)
 
         pdf.output(self.filename)
 
